@@ -1,0 +1,17 @@
+describe('My First Test', () => {
+    it('Visits the student', () => {
+      cy.visit('http://localhost:8080/sms/SMS.html')
+      cy.contains('STUDENT ADMISSION FORM')
+cy.get('[for="studentid"]').type('2017ME0010')
+cy.get('#firstname').type('HARIKA')
+cy.get('#lastname').type('Ramagani')
+cy.get('#birthday').type('1997-01-23')
+cy.get('#month').type('2021-03-21')
+ cy.get('[value="FEMALE"]').click()
+cy.get('#address').type('guntur')
+cy.get('#deptid').select('CE')
+cy.get('#status').select('Active')
+cy.get('#studentForm > #semesterno').select('2')
+cy.get('[onclick="addStudent()"]').click()
+    })
+  })
