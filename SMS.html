@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>STUDENT ADMISSION FORM</title>
+<u><aligncenter><h1>STUDENT ADMISSION FORM</u></aligncenter></h1>
+</head>
+<body>
+<h2>STUDENT ADD</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" ></script>
+
+
+<script>
+  function addStudent()
+ {
+     var myForm = document.getElementById('studentForm');
+
+     var student = {
+"studentid" :  myForm.elements['studentid'].value,
+ "firstname" : myForm.elements['firstname'].value,
+ "lastname" : myForm.elements['lastname'].value,
+ "address" : myForm.elements['address'].value,
+ "dob" : myForm.elements['dob'].value, 
+  "yoj" : myForm.elements['yoj'].value,
+ "gender" : myForm.elements['gender'].value,
+ "deptid" : myForm.elements['deptid'].value,
+ "status" : myForm.elements['status' ].value,
+ "semesterno" : myForm.elements[ 'semesterno'].value
+}
+
+$.ajax({
+    method:"POST",
+    url:"http://localhost:2000/addStudent",
+    data :student,
+    success: (result) => {
+        console.log("1",result);
+        alert("student added")
+    },
+    error: (error)=> {
+        console.log("2",error);
+    alert("student cant add")
+    }
+});
+ }
+</script>
+  
+      <script>
+        function getStudent()
+         {
+             var myForm = document.getElementById('studentForm');
+             var student = {
+        "studentid" :  myForm.elements['studentid'].value
+        }  
+        $.ajax({
+            method:"POST",
+            url:"http://localhost:2000/getStudent",
+            data :student,
+            success: (result) => {
+            console.log("data",result);  
+         document.addform.firstname.value = result.record.firstname;
+         document.addform.lastname.value = result.record.lastname;
+         document.addform.address.value = result.record.address;
+         document.addform.dob.value = result.record.dob;
+         document.addform.yoj.value = result.record.yoj;
+         document.addform.gender.value =  result.record.gender;
+         document.addform.deptid.value = result.record.deptid;
+         document.addform.status.value = result.record.status;
+         document.addform.semesterno.value = result.record.semesterno
+            },
+            error: (error) => {
+                console.log("not found");
+                alert("student not found")
+            }
+        
+        });
+         }
+        </script> 
+
+               
+<script>
+  function updateStudent()
+ {
+     var myForm = document.getElementById('studentForm');
+console.log(myForm.elements['studentid'].value);
+     var student = {
+"studentid" :  myForm.elements['studentid'].value,
+"firstname" : myForm.elements['firstname'].value,
+"lastname" : myForm.elements['lastname'].value,
+"address" : myForm.elements['address'].value
+     }
+     console.log("data",student);
+$.ajax({
+    method:"POST",
+    url:"http://localhost:2000/updateStudent",
+    data :student,
+    success: (result) => {
+        console.log("1","sucessfully updated");
+    },
+    error: (error)=> {
+        console.log("2","cant update");
+    }
+});
+ }
+</script>
+
+        
+<script>
+  function deleteStudent()
+ {
+     var myForm = document.getElementById('studentForm');
+     var student = {
+"studentid" :  myForm.elements['studentid'].value,
+     }
+$.ajax({
+    method:"POST",
+    url:"http://localhost:2000/deleteStudent",
+    data :student,
+    success: (result) => {
+     // if( status="suspended" )
+        console.log("1","sucessfully deleted");
+    },
+    error: (error)=> {
+        console.log("2","cant delete");
+    }
+});
+ }
+</script>
+
+
+
+    <script>
+    function marksAdd()
+   {
+       var myForm = document.getElementById('marksAddForm');
+  
+       var student = {
+   "studentid" :  myForm.elements['studentid'].value,
+   "semesterno" : myForm.elements['semesterno'].value,
+   "deptid" : myForm.elements['deptid'].value,
+   "courseid1" : myForm.elements['courseid1'].value,
+   "marks1" : myForm.elements['marks1'].value,
+   "courseid2" : myForm.elements['courseid2'].value,
+   "marks2" : myForm.elements['marks2'].value,
+   "courseid3" : myForm.elements['courseid3'].value,
+   "marks3" : myForm.elements['marks3'].value,
+   "examstatus" : myForm.elements['examstatus'].value,
+   "datetaken" : myForm.elements['datetaken'].value
+  
+  }
+  
+  $.ajax({
+      method:"POST",
+      url:"http://localhost:2000/marksAdd",
+      data :student,
+      success: (result) => {
+          console.log("1",result);
+      },
+      error: (error)=> {
+          console.log("2",error);
+      }
+  });
+   }
+  </script>
+
+<script>
+    function getStudentsMarkList()
+   {
+       var myForm = document.getElementById('reportForm');
+  
+       var student = {
+        "studentid" :  myForm.elements['studentid'].value
+
+    }
+  
+  $.ajax({
+      method:"POST",
+      url:"http://localhost:2000/getStudentsMarkList",
+      data :student,
+      success: (result) => {
+          console.log("1",sucessfull);
+      },
+      error: (error)=> {
+          console.log("2",error);
+      }
+  });
+   }
+  </script>
+
+<script>
+    function getIndividualList()
+   {
+       var myForm = document.getElementById('reportForm');
+  
+       var student = {
+        "deptid" :  myForm.elements['deptid'].value
+
+    }
+  
+  $.ajax({
+      method:"POST",
+      url:"http://localhost:2000/getIndividualList",
+      data :student,
+      success: (result) => {
+          console.log("1",sucessfull);
+      },
+      error: (error)=> {
+          console.log("2",error);
+      }
+  });
+   }
+  </script>
+
+
+   
+<script>
+    function getSemesterMarklist()
+   {
+       var myForm = document.getElementById('reportForm');
+  
+       var student = {
+        "semesterno" :  myForm.elements['semesterno'].value
+
+    }
+  
+  $.ajax({
+      method:"POST",
+      url:"http://localhost:2000/getSemesterMarklist",
+      data :student,
+      success: (result) => {
+          console.log("1",sucessfull);
+      },
+      error: (error)=> {
+          console.log("2",error);
+      }
+  });
+   }
+  </script>
+ 
+
+<form action ="" name="addform" id = "studentForm"> 
+
+<label for="studentid">STUDENT ID:</label>
+<input type="text" id="studentid" name="studentid" maxlength="10">       &nbsp;&nbsp; 
+
+<label name="firstname">FIRST NAME:</label>
+<input type="text" id="firstname" name="firstname" maxlength="30"><br><br>                              &nbsp;              &nbsp; 
+
+
+<label name="lastname"> LAST NAME: </label>
+<input type="text" id="lastname" name="lastname" maxlength="30"><br><br>
+
+<label name="birthday">DATE OF BIRTH:</label>
+<input type="date" id="birthday" name="dob">                          &nbsp;&nbsp; 
+
+
+<label name="month">YEAR OF JOINING:</label>            
+<input type="date" id="month" name="yoj"><br><br>
+
+<label name="gender">GENDER:</label>
+<input type="radio"  name="gender" value="MALE"/>MALE<br>
+
+<input type="radio"  name="gender" value="FEMALE"/>FEMALE<br>
+
+
+<label name="address">ADDRESS:</label><BR>
+    <input type="text" id="address" name="address">
+    
+<tr>
+<td>DEPARTMENT:</td>
+<select name ="deptid" id ="deptid">
+<option value =""></option>
+<option value ="ME">ME</option>
+<option value ="CE">CE</option>
+<option value ="HE">HE</option>
+</td>
+</tr>
+</select><br><br>
+
+<tr>
+<td>STATUS:</td>
+<select name ="status" id ="status">
+<option value =""></option>
+<option value ="ACTIVE">Active</option>
+<option value ="Suspended">Suspended</option>
+<option value ="Rusticated">Rusticated</option>
+<option value ="Graduated">Graduated</option><br><br>
+</td>
+</tr>
+</select><br><br>
+
+<tr>
+<td>SEMESTER NO:</td>
+<select name ="semesterno" id ="semesterno">
+<option value =""></option>
+<option value ="1">1</option>
+<option value ="2">2</option>
+<option value ="3">3</option>
+<br><br>
+</td>
+</tr>
+</select><br><br>
+ 
+<button type="button" onclick = "addStudent()">ADD</button>                      &nbsp;&nbsp;   
+<button type="button" onclick ="getStudent()">GET</button>                       &nbsp;&nbsp;  
+<button type="button" onclick ="updateStudent()">MODIFY</button>                                     &nbsp;&nbsp; 
+<button type="button" onclick="deleteStudent()">DELETE</button>                                     &nbsp;&nbsp; 
+<button type="reset" value="RESET">RESET</button>                                                         &nbsp;&nbsp; 
+  
+</form>
+<BR>
+<HR>
+
+<form action ="" name="marksAddForm" id = "marksAddForm">  
+<h3>MARKS ADD</h3>
+
+<label for="STUDENT ID">STUDENT ID:</label>
+<input type="text" id="studentid" name="studentid" maxlength="10">       &nbsp;&nbsp; 
+
+
+
+<tr>
+    <td>DEPARTMENT:</td>
+    <select name ="deptid" id ="dept">
+    <option value =""></option>
+    <option value ="ME">ME</option>
+    <option value ="CE">CE</option>
+    <option value ="HE">HE</option>
+    </td>
+    </tr>
+    </select>  &nbsp;&nbsp; 
+
+
+<tr>
+<td>SEMESTER NO:</td>
+<select name ="semesterno" id ="semesterno">
+<option value =""></option>
+<option value ="1">1</option>
+<option value ="2">2</option>
+<option value ="3">3</option>
+<br><br>
+</td>
+</tr>
+</select><br><br>
+
+<label for="COURSE ID1">COURSE1 ID:</label>
+<input type="text" id="courseid1" name="courseid1">       &nbsp;&nbsp; 
+
+
+<label for="MARKS1">MARKS1:</label>
+<input type="number" id="marks1" name="marks1" min="0", max="100"><br><br>
+
+<label for="courseid2">COURSE2 ID:</label>
+<input type="text" id="courseid2" name="courseid2">              &nbsp;&nbsp; 
+
+
+<label for="MARKS2">MARKS2:</label>
+<input type="number" id="marks2" name="marks2" min="0", max="100"><br><br>
+
+<label for="courseid3">COURSE3 ID:</label>
+<input type="text" id="courseid3" name="courseid3">                &nbsp;&nbsp; 
+  
+
+<label for="MARKS3">MARKS3:</label>
+<input type="number" id="marks3" name="marks3" min="0", max="100"><br><br>
+
+<tr>
+    <td>STATUS:</td>
+    <select name ="examstatus" id ="examstatus">
+    <option value =""></option>
+    <option value ="PRESENT">PRESENT</option>
+    <option value ="ABSENT">ABSENT</option>
+    </td>
+    </tr>
+    </select><br><br>
+
+    <label for="month">DATE TAKEN:</label>            
+<input type="date" id="datetaken" name="datetaken"><br><br>
+
+
+<button type="button" onclick = "marksAdd()">ADD</button>   &nbsp;&nbsp; 
+<button type="reset" value="RESET">RESET</button>                   &nbsp;&nbsp; 
+
+</form>
+<BR>
+<HR>
+
+<form action ="" name="reportForm" id = "reportForm"> 
+<h4>REPORT CARD</h4>
+
+<label for="STUDENT ID">STUDENT ID:</label>
+<input type="text" id="studentid" name="studentid" maxlength="10">       &nbsp;&nbsp; 
+
+
+<tr>
+<td>SEMESTER NO:</td>
+<select name ="semesterno" id ="semesterno">
+<option value =""></option>
+<option value ="1">1</option>
+<option value ="2">2</option>
+<option value ="3">3</option>
+</td>
+</tr>
+</select><BR><BR>
+
+
+  <tr>
+    <td>DEPARTMENT:</td>
+    <select name ="deptid" id ="dept">
+    <option value =""></option>
+    <option value ="ME">ME</option>
+    <option value ="CE">CE</option>
+    <option value ="HE">HE</option>
+    </td>
+    </tr>
+    </select><br><br>   &nbsp;&nbsp; 
+
+<!-- <tr>
+<td>SEMESTER NO:</td>
+<select name ="semester no" id ="semester no">
+<option value =""></option>
+<option value ="1">1</option>
+<option value ="2">2</option>
+<option value ="3">3</option>
+</td>
+</tr>
+</select><BR><BR> -->
+
+    <button type="button" onclick = "getStudentsMarkList()">STUDENT MARKS</button>  &nbsp;&nbsp;
+    <button type="button" onclick = "getIndividualList()">DEPARTMENT  MARKS</button>   &nbsp;&nbsp;
+    <button type="button" onclick = "getSemesterMarklists()">SEMESTER  MARKS</button>   &nbsp;&nbsp;
+    <button type="reset" value="RESET">RESET</button>      &nbsp;&nbsp; 
+
+
+</form> 
+</body>
+</html>
